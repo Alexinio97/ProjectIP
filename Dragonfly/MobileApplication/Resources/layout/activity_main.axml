@@ -1,7 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-</RelativeLayout>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:theme="@style/Dragonfly"
+	android:orientation="vertical"
+	android:background="#ff757575">
+	<Button
+		android:text="Grant Access"
+		android:layout_width="245.0dp"
+		android:layout_height="wrap_content"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:id="@+id/btnCheck"
+		android:layout_marginBottom="35dp"
+		android:layout_marginLeft="67dp"
+		android:layout_marginRight="67dp"
+		android:layout_marginTop="30dp"
+		android:height="50dp"
+		android:background="#ff689f38"
+		/>
+	<Button
+		android:text="Visualize Personal Data"
+		android:layout_width="245.0dp"
+		android:layout_height="wrap_content"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_marginBottom="35dp"
+		android:layout_marginLeft="67dp"
+		android:layout_marginRight="67dp"
+		android:layout_marginTop="30dp"
+		android:height="50dp"
+		android:id="@+id/btnPersonalData"
+		android:background="#ff689f38"/>
+	<Button
+		android:text="Working Hours"
+		android:layout_width="245.0dp"
+		android:layout_height="wrap_content"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_marginBottom="35dp"
+		android:layout_marginLeft="67dp"
+		android:layout_marginRight="67dp"
+		android:layout_marginTop="30dp"
+		android:height="50dp"
+		android:id="@+id/btnWorkingHours"
+		android:background="#ff689f38"/>
+</LinearLayout>
