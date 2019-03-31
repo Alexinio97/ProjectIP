@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace MobileApplication
 {
-    [Activity(Label = "Personal Data", Theme = "@style/Dragonfly")]
+    [Activity(Label = "@string/personal_data", Theme = "@style/Dragonfly")]
     public class PersonalData : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

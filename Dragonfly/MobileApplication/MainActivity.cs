@@ -7,7 +7,7 @@ using System;
 
 namespace MobileApplication
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/Dragonfly", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/Dragonfly")]
     public class MainActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -15,10 +15,11 @@ namespace MobileApplication
             base.OnCreate(savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
-
+           
             FindViewById<Button>(Resource.Id.btnCheck).Click += Check_Data;
 
             FindViewById<Button>(Resource.Id.btnPersonalData).Click += View_Data;
+
         }
 
         private void View_Data(object sender, EventArgs e)
@@ -31,6 +32,8 @@ namespace MobileApplication
         {
             // showing a random message
             Toast.MakeText(this.ApplicationContext, "Access granted", ToastLength.Short).Show();
+
         }
+        
     }
 }

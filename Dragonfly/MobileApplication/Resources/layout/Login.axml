@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#ff616161">
+	<EditText
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:id="@+id/txtUser"
+		android:layout_marginBottom="35dp"
+		android:layout_marginLeft="57dp"
+		android:layout_marginRight="57dp"
+		android:layout_marginTop="35dp"
+		android:cursorVisible="true"
+		android:hint="Username"/>
+	<EditText
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:id="@+id/txtPassword"
+		android:layout_marginBottom="35dp"
+		android:layout_marginLeft="57dp"
+		android:layout_marginRight="57dp"
+		android:layout_marginTop="35dp"
+		android:cursorVisible="true"
+		android:hint="Password"
+		android:password="true"/>
+	<Button
+		android:text="Login"
+		android:layout_width="245.0dp"
+		android:layout_height="wrap_content"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:id="@+id/btnLogin"
+		android:layout_marginBottom="35dp"
+		android:layout_marginLeft="67dp"
+		android:layout_marginRight="67dp"
+		android:layout_marginTop="30dp"
+		android:height="50dp"
+		android:background="#ff689f38"
+		/>
+	
+</LinearLayout>
