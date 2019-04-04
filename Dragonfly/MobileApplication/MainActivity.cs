@@ -20,6 +20,7 @@ namespace MobileApplication
 
             FindViewById<Button>(Resource.Id.btnPersonalData).Click += View_Data;
 
+            
         }
 
         private void View_Data(object sender, EventArgs e)

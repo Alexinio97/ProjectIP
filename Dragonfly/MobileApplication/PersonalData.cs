@@ -21,6 +21,21 @@ namespace MobileApplication
 
             // Create your application here
             SetContentView(Resource.Layout.Personal_Data);
+            Employee myself = new Employee(14, "TM97", "Andricsak", "Alexandru");
+            DisplayData(myself);
+        }
+
+        private void DisplayData(Employee employee)
+        {
+            var txtName = FindViewById<TextView>(Resource.Id.txtFirstName);
+            var txtLastName = FindViewById<TextView>(Resource.Id.txtLastName);
+            var txtCar = FindViewById<TextView>(Resource.Id.txtCar);
+            var txtBadge = FindViewById<TextView>(Resource.Id.txtBadge);
+
+            txtName.Text = employee.FirstName;
+            txtLastName.Text = employee.LastName;
+            txtBadge.Text = employee.Badge;
+            txtCar.Text = "TM97LEX";
         }
     }
 }
