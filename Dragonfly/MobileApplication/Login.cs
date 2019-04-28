@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace MobileApplication
 {
-    [Activity(Label = "Login",Theme = "@style/Dragonfly", MainLauncher = true)]
+    [Activity(Label = "Dragonfly",Theme = "@style/Dragonfly", MainLauncher = true)]
     public class Login : Activity
     {
         const string user = "Alex";
