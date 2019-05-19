@@ -1,7 +1,13 @@
 <?php
-mysql_connect("localhost","root","") or die ("Nu se poate
+
+$servername = "db4free.net";
+$username = "dragonfly97";
+$password = "DragonFly123";
+$dbname = "dragonfly";
+
+mysql_connect($servername,$username,$password) or die ("Nu se poate
 conecta la serverul MySQL");
-mysql_select_db("angajati") or die("Nu se poate selecta baza
+mysql_select_db($dbname) or die("Nu se poate selecta baza
 de date");
 
 $cnp=$_POST['cnp_form'];

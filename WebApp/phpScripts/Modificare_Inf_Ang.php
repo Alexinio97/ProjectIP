@@ -8,10 +8,10 @@ $divizia = $_POST['Divizia'];
 $acces_perm = $_POST['Access'];
 
 
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "myDB";
+$servername = "db4free.net";
+$username = "dragonfly97";
+$password = "DragonFly123";
+$dbname = "dragonfly";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
