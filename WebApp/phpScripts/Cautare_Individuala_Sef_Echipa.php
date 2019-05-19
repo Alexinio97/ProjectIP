@@ -13,7 +13,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT Marca, CNP, Prenume, Nume FROM MyGuests where marca='$marca'";
+$sql = "SELECT Marca, CNP, Prenume, Nume FROM Angajati where marca='$marca'";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
