@@ -8,7 +8,8 @@ using Android.Bluetooth;
 using System.Linq;
 using Java.Util;
 using System.Collections.Generic;
-
+using System.Text;
+using System.Threading;
 
 namespace MobileApplication
 {
@@ -40,55 +41,67 @@ namespace MobileApplication
 
         private async void Request_AccessAsync(object sender, EventArgs e)
         {
-            byte[] buffer = new byte[2] { 0xFF, 0xFF };
+            byte[] buffer = new byte[256];
+            string access_code = Login.GetPass(); //storing password in order to check the access code with arduino
             //check if bluetooth is on
             if (!(adapter.IsEnabled))
             {
                 Console.WriteLine("Enabling bluetooth");
                 Toast.MakeText(ApplicationContext, "Enabling bluetooth first", ToastLength.Long).Show();
                 adapter.Enable();
+                Thread.Sleep(2000); // if bluetooth is not up
             }
-            else
+
+            // this will connect to bluetooth
+            if (adapter == null)
+                throw new Exception("No bluetooth adapter found.");
+            if (!adapter.IsEnabled)
+                throw new Exception("Bluetooth adapter is not enabled");
+            BluetoothDevice device = (from bd in this.adapter.BondedDevices
+                                      where bd.Name == "DESKTOP-BNQI17A"
+                                      select bd).FirstOrDefault();
+
+
+            Console.WriteLine("\n\n" + device.Name);
+
+            if (device == null)
+                throw new Exception("Named device not found.");
+
+            _socket = CreateRfcommSocket(device); // used another function for creating the socket
+
+            try
             {
-                // this will connect to bluetooth
-                if (adapter == null)
-                    throw new Exception("No bluetooth adapter found.");
-                if (!adapter.IsEnabled)
-                    throw new Exception("Bluetooth adapter is not enabled");
-                BluetoothDevice device = (from bd in this.adapter.BondedDevices
-                                          where bd.Name == "DESKTOP-BNQI17A"
-                                          select bd).FirstOrDefault();
+                await _socket.ConnectAsync();
+
+                Toast.MakeText(ApplicationContext, "Connected with bluetooth", ToastLength.Short).Show();
+                // Write data to the device
+                await _socket.OutputStream.WriteAsync(Encoding.ASCII.GetBytes(access_code));
+                Console.WriteLine("String sent...");
+                Console.WriteLine("Waiting for response...");
+                //await _socket.InputStream.ReadAsync(buffer, 0, buffer.Length);
 
 
-                Console.WriteLine("\n\n" + device.Name);
+                //Console.WriteLine($"Received byte array from buffer is {buffer}");
 
-                if (device == null)
-                    throw new Exception("Named device not found.");
-                
-                _socket = CreateRfcommSocket(device);
+                //var receivedString = Encoding.UTF8.GetString(buffer); //convert the bytes received to string
 
-                try
-                { 
-                    await _socket.ConnectAsync();
+                //Console.WriteLine($"Converted string is {receivedString}");
+                //if(receivedString.Equals("Yes"))
+                //    Toast.MakeText(ApplicationContext, "Access Granted", ToastLength.Short).Show(); //arduino will lift the barrier
 
-                    // Read data from the device
-                    //await _socket.InputStream.ReadAsync(buffer, 0, buffer.Length);
-
-                    // Write data to the device
-                    //await _socket.OutputStream.WriteAsync(buffer, 0, buffer.Length);
-
-                    
-                    Toast.MakeText(ApplicationContext, "Connected with bluetooth", ToastLength.Short).Show();
-                    _socket.Close();
-                }
-                catch (Exception ex)
-                {
-                    Toast.MakeText(ApplicationContext, "couldn't connect with bluetooth", ToastLength.Short).Show();
-                    Console.WriteLine("\n\n Error is -- " + ex.ToString() + "\n\n");
-                     // this is the function that overwrites the socket in case of failure
-                }
             }
-
+            catch (Exception ex)
+            {
+                Toast.MakeText(ApplicationContext, "couldn't connect with bluetooth", ToastLength.Short).Show();
+                Console.WriteLine("\n\n Error is -- " + ex.ToString() + "\n\n");
+                // this is the function that overwrites the socket in case of failure
+            }
+            finally
+            {
+                adapter.Disable(); // disable bluetooth
+                _socket.Close(); //closing communication socket
+            }
+        }
             BluetoothSocket CreateRfcommSocket(BluetoothDevice bTdevice)
             { // This is an "undocumented" call that is needed to (mostly) avoid a Bluetooth Connection error
               // introduced in Android v4.2 and higher. It is used as a "fallback" connection.
@@ -103,4 +116,3 @@ namespace MobileApplication
 
         }
     }
-}

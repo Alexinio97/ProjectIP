@@ -14,22 +14,22 @@ namespace MobileApplication
 {
     class Employee
     {
-        private int _accessCode;
-        private string _badge;
-        private string _firstName;
-        private string _lastName;
+        private string _badge; //marca
+        private string _name;
+        private string _division;
+        private string _access;
 
-        public Employee(int accessCode, string badge, string firstName, string lastName)
+        public Employee(string badge, string name, string division, string access)
         {
-            _accessCode = accessCode;
             _badge = badge;
-            _firstName = firstName;
-            _lastName = lastName;
+            _name = name;
+            _division = division;
+            _access = access;
         }
 
-        public int AccessCode { get => _accessCode; set => _accessCode = value; }
         public string Badge { get => _badge; set => _badge = value; }
-        public string FirstName { get => _firstName; set => _firstName = value; }
-        public string LastName { get => _lastName; set => _lastName = value; }
+        public string Name { get => _name; set => _name = value; }
+        public string Division { get => _division; set => _division = value; }
+        public string Access { get => _access; set => _access = value; }
     }
 }

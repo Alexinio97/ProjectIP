@@ -27,11 +27,11 @@
 		<TextView
 			android:text="Medium Text"
 			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:id="@+id/txtFirstName"
+			android:id="@+id/txtName"
 			android:layout_marginLeft="60dp"
 			android:layout_marginRight="25dp"/>
 		<TextView
-			android:text="Prenume"
+			android:text="Tip acces"
 			android:height="45dp"
 			android:textAppearance="?android:attr/textAppearanceMedium"
 			android:layout_marginLeft="25dp"
@@ -39,19 +39,19 @@
 		<TextView
 			android:text="Medium Text"
 			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:id="@+id/txtLastName"
+			android:id="@+id/txtAccess"
 			android:layout_marginLeft="60dp"
 			android:layout_marginRight="25dp"/>
-		<TextView
-			android:text="Nr. Masina"
-			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:layout_marginLeft="25dp"
-			android:height="45dp"
-			android:id="@+id/textView2" />
+        <TextView
+            android:text="Divizie"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="25dp"
+            android:height="45dp"
+            android:id="@+id/textView2" />
 		<TextView
 			android:text="Medium Text"
 			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:id="@+id/txtCar"
+			android:id="@+id/txtDivision"
 			android:layout_marginLeft="60dp"
 			android:layout_marginRight="25dp"/>
 		<TextView

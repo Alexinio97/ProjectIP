@@ -19,8 +19,8 @@ namespace MobileApplication
         private DateTime workingDay;
         private bool checkIn;
 
-        public WorkingHours(DateTime startTime, DateTime exitTime, DateTime workingDay, bool checkIn, int accessCode, string badge, string firstName, string lastName) : 
-            base(accessCode,badge,firstName,lastName)
+        public WorkingHours(DateTime startTime, DateTime exitTime, DateTime workingDay, bool checkIn, string accessType, string badge, string firstName, string lastName) : 
+            base(accessType,badge,firstName,lastName)
         {
             this.startTime = startTime;
             this.exitTime = exitTime;

@@ -16,12 +16,9 @@ namespace MobileApplication
     [Activity(Label = "Dragonfly",Theme = "@style/Dragonfly", MainLauncher = true)]
     public class Login : Activity
     {
-        string user;
-        string password;
-        private string myConnectionString = "Server=db4free.net;" +
-            "Port=3306;"+
-            "database=dragonfly;" +
-            "User Id=dragonfly97;Password=DragonFly123;charset=utf8;oldguids=true";
+        static string user;
+        static string password;
+       
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -38,47 +35,51 @@ namespace MobileApplication
             var inputPass = FindViewById<EditText>(Resource.Id.txtPassword).Text;
 
             
-            MySqlConnection myConn = new MySqlConnection(myConnectionString);
+
+            MySqlConnection myConn = new MySqlConnection(Resources.GetString(Resource.String.myConnectionString));
             try
             {
                 
                 if(myConn.State == System.Data.ConnectionState.Closed)
                 {
-                    myConn.Open();
+                    myConn.Open(); // connection timeout is set to 60 ,check strings.xml
                 }
-                string SqlCommand = "SELECT FROM ANGAJATI WHERE marca=" + inputUser + " AND CodAcces=" + inputPass;
+                string SqlCommand = "SELECT Marca,Cod_Acces FROM Angajati WHERE marca=\""+ inputUser + "\" AND Cod_Acces=\"" + inputPass + "\"";
                 MySqlCommand cmd = new MySqlCommand(SqlCommand,myConn);
 
                 var queryResult = cmd.ExecuteReader();
-                user = queryResult[1].ToString();
-                password = queryResult[2].ToString();
+                queryResult.Read();
+                user = queryResult.GetString(0);
+                password = queryResult.GetString(1);
                 Console.WriteLine("User = " + user + " Password= " + password);
 
                 cmd.Dispose();
+                Toast.MakeText(ApplicationContext, "Succes", ToastLength.Short).Show();
+                StartActivity(typeof(MainActivity));
+                Finish(); // this won't allow the user to go back to the login form if he logged in
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error connecting to database, error " + ex.ToString());
                 Toast.MakeText(ApplicationContext, "Incorrect username or password", ToastLength.Long).Show();
+
+                FindViewById<EditText>(Resource.Id.txtUser).Text = "";
+                FindViewById<EditText>(Resource.Id.txtPassword).Text = "";
             }
             finally
             {
                 myConn.Close();
             }
+        }
 
+        public static string GetUser() // with this we could share 'marca' to other c# files
+        {
+            return user;
+        }
 
-            //if(inputUser.Equals(user) && inputPass.Equals(password))
-            //{
-            //    Toast.MakeText(ApplicationContext, "Succes", ToastLength.Short).Show();
-            //    StartActivity(typeof(MainActivity));
-            //    Finish(); // this won't allow the user to go back to the login form if he logged in
-            //}
-            //else
-            //{
-            //    Toast.MakeText(ApplicationContext, "Incorrect username or password", ToastLength.Short).Show();
-            //    FindViewById<EditText>(Resource.Id.txtUser).Text = "";
-            //    FindViewById<EditText>(Resource.Id.txtPassword).Text="";
-            //}
+        public static string GetPass() // get the access code for bluetooth access
+        {
+            return password;
         }
     }
 }

@@ -2849,17 +2849,17 @@ namespace MobileApplication
 			// aapt resource value: 0x7f080013
 			public const int transition_transform = 2131230739;
 			
+			// aapt resource value: 0x7f0800b6
+			public const int txtAccess = 2131230902;
+			
 			// aapt resource value: 0x7f0800b8
 			public const int txtBadge = 2131230904;
 			
 			// aapt resource value: 0x7f0800b7
-			public const int txtCar = 2131230903;
+			public const int txtDivision = 2131230903;
 			
 			// aapt resource value: 0x7f0800b4
-			public const int txtFirstName = 2131230900;
-			
-			// aapt resource value: 0x7f0800b6
-			public const int txtLastName = 2131230902;
+			public const int txtName = 2131230900;
 			
 			// aapt resource value: 0x7f08009d
 			public const int txtPassword = 2131230877;
@@ -3269,6 +3269,9 @@ namespace MobileApplication
 			
 			// aapt resource value: 0x7f090020
 			public const int character_counter_pattern = 2131296288;
+			
+			// aapt resource value: 0x7f09002a
+			public const int myConnectionString = 2131296298;
 			
 			// aapt resource value: 0x7f090021
 			public const int password_toggle_content_description = 2131296289;

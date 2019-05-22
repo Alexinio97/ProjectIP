@@ -2,4 +2,5 @@
     <string name="app_name">Dragonfly</string>
     <string name="action_settings">Settings</string>
     <string name="personal_data">Personal Data</string>
+    <string name="myConnectionString">Server=db4free.net;Port=3306;database=dragonfly;User Id=dragonfly97;Password=DragonFly123;charset=utf8;oldguids=true;Connection Timeout=60;</string>
 </resources>
