@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:p4="http://xamarin.com/mono/android/designer"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff616161"
+    android:theme="@style/Dragonfly"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:text="Numar total de ore pe ziua curenta"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:padding="60px"
+        android:gravity="center" />
+    <TextView
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="150.5dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/txttoday_hours"
+        android:padding="35px"
+        android:layout_marginLeft="110dp"
+        android:gravity="center" />
+    <TextView
+        android:text="Numarul total de ore pe luna curenta"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:padding="35px"
+        android:gravity="center"/>
+    <TextView
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtmonth_hours"
+        android:padding="35px"
+        android:gravity="center"/>
+
+
+</LinearLayout>

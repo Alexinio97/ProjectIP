@@ -16,9 +16,14 @@ namespace MobileApplication
     [Activity(Label = "Dragonfly",Theme = "@style/Dragonfly", MainLauncher = true)]
     public class Login : Activity
     {
-        static string user;
+        static string user; // we'll use user and password to other activities
         static string password;
-       
+        static string numberCar; // check if the user has a car registered
+
+        static string nume;
+        static string prenume;
+        static string cnp;
+        static string divizie;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -52,9 +57,26 @@ namespace MobileApplication
                 user = queryResult.GetString(0);
                 password = queryResult.GetString(1);
                 Console.WriteLine("User = " + user + " Password= " + password);
-
+                queryResult.Close();
                 cmd.Dispose();
+                
+                // here we will se if the user has a car and store it
+                string sqlCommandLogin = "SELECT Nume,Prenume,CNP,Divizia FROM Angajati where marca=\"" + inputUser + "\"";
+                MySqlCommand cmdLogin = new MySqlCommand(sqlCommandLogin, myConn);
+
+                var queryResultLogin = cmdLogin.ExecuteReader();
+                if (queryResultLogin.Read())
+                {
+                    nume = queryResultLogin.GetString(0);
+                    prenume = queryResultLogin.GetString(1);
+                    cnp = queryResultLogin.GetString(2);
+                    divizie = queryResultLogin.GetString(3);
+                }
                 Toast.MakeText(ApplicationContext, "Succes", ToastLength.Short).Show();
+                // close connections
+                queryResultLogin.Close();
+                cmdLogin.Dispose();
+                
                 StartActivity(typeof(MainActivity));
                 Finish(); // this won't allow the user to go back to the login form if he logged in
             }
@@ -72,6 +94,10 @@ namespace MobileApplication
             }
         }
 
+        public static string GetDivizie()
+        {
+            return divizie;
+        }
         public static string GetUser() // with this we could share 'marca' to other c# files
         {
             return user;
@@ -80,6 +106,26 @@ namespace MobileApplication
         public static string GetPass() // get the access code for bluetooth access
         {
             return password;
+        }
+
+        public static string GetNumberCar()
+        {
+            return numberCar;
+        }
+
+        public static string GetNume()
+        {
+            return nume;
+        }
+
+        public static string GetPrenume()
+        {
+            return prenume;
+        }
+
+        public static string GetCNP()
+        {
+            return cnp;
         }
     }
 }

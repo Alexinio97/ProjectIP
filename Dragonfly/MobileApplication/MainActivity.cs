@@ -10,12 +10,14 @@ using Java.Util;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using MySql.Data.MySqlClient;
 
 namespace MobileApplication
 {
     [Activity(Label = "@string/app_name", Theme = "@style/Dragonfly")]
     public class MainActivity : AppCompatActivity
     {
+        string deviceName; // the device that we will connect the mobile too
         BluetoothAdapter adapter = BluetoothAdapter.DefaultAdapter;
         BluetoothSocket _socket = null;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -28,7 +30,14 @@ namespace MobileApplication
 
             FindViewById<Button>(Resource.Id.btnPersonalData).Click += View_Data;
 
+            FindViewById<Button>(Resource.Id.btnWorkingHours).Click += View_Hours;
 
+
+        }
+
+        private void View_Hours(object sender,EventArgs e)
+        {
+            StartActivity(typeof(WorkingHours));
         }
 
         private void View_Data(object sender, EventArgs e)
@@ -42,7 +51,14 @@ namespace MobileApplication
         private async void Request_AccessAsync(object sender, EventArgs e)
         {
             byte[] buffer = new byte[256];
+            MySqlConnection myConn = new MySqlConnection(Resources.GetString(Resource.String.myConnectionString));
+            if (myConn.State == System.Data.ConnectionState.Closed)
+            {
+                myConn.Open(); // connection timeout is set to 60 ,check strings.xml
+            }
+
             string access_code = Login.GetPass(); //storing password in order to check the access code with arduino
+            string numberCar=Login.GetNumberCar(); // this will be set  if the user has a car
             //check if bluetooth is on
             if (!(adapter.IsEnabled))
             {
@@ -57,8 +73,10 @@ namespace MobileApplication
                 throw new Exception("No bluetooth adapter found.");
             if (!adapter.IsEnabled)
                 throw new Exception("Bluetooth adapter is not enabled");
+         
+
             BluetoothDevice device = (from bd in this.adapter.BondedDevices
-                                      where bd.Name == "DESKTOP-BNQI17A"
+                                      where bd.Name == "HC-05"
                                       select bd).FirstOrDefault();
 
 
@@ -66,22 +84,29 @@ namespace MobileApplication
 
             if (device == null)
                 throw new Exception("Named device not found.");
-
+            
             _socket = CreateRfcommSocket(device); // used another function for creating the socket
-
+            Console.WriteLine(device.GetUuids().ToString());
+            string InsertSql = "Update Angajat_Intrare SET Marca=@marca, Nume=@nume, Prenume=@prenume, Poza=@poza, Divizia=@divizie";
+            MySqlCommand cmdInsert = new MySqlCommand(InsertSql, myConn);
+            cmdInsert.Parameters.AddWithValue("@marca", Login.GetUser());
+            cmdInsert.Parameters.AddWithValue("@nume", Login.GetNume());
+            cmdInsert.Parameters.AddWithValue("@prenume", Login.GetPrenume());
+            cmdInsert.Parameters.AddWithValue("@poza", null);
+            cmdInsert.Parameters.AddWithValue("@divizie", Login.GetDivizie());
+            cmdInsert.ExecuteNonQuery();
+            cmdInsert.Dispose();
             try
             {
                 await _socket.ConnectAsync();
+                
 
                 Toast.MakeText(ApplicationContext, "Connected with bluetooth", ToastLength.Short).Show();
                 // Write data to the device
-                await _socket.OutputStream.WriteAsync(Encoding.ASCII.GetBytes(access_code));
-                Console.WriteLine("String sent...");
-                Console.WriteLine("Waiting for response...");
-                //await _socket.InputStream.ReadAsync(buffer, 0, buffer.Length);
+                await _socket.OutputStream.WriteAsync(Encoding.ASCII.GetBytes(access_code));  //send Marca
+                
 
-
-                //Console.WriteLine($"Received byte array from buffer is {buffer}");
+                Console.WriteLine("Access code sent...");
 
                 //var receivedString = Encoding.UTF8.GetString(buffer); //convert the bytes received to string
 

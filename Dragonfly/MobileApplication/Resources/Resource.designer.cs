@@ -2600,8 +2600,8 @@ namespace MobileApplication
 			// aapt resource value: 0x7f080061
 			public const int list_item = 2131230817;
 			
-			// aapt resource value: 0x7f0800bb
-			public const int masked = 2131230907;
+			// aapt resource value: 0x7f0800bd
+			public const int masked = 2131230909;
 			
 			// aapt resource value: 0x7f0800a5
 			public const int media_actions = 2131230885;
@@ -2867,6 +2867,12 @@ namespace MobileApplication
 			// aapt resource value: 0x7f08009c
 			public const int txtUser = 2131230876;
 			
+			// aapt resource value: 0x7f0800bb
+			public const int txtmonth_hours = 2131230907;
+			
+			// aapt resource value: 0x7f0800ba
+			public const int txttoday_hours = 2131230906;
+			
 			// aapt resource value: 0x7f08002d
 			public const int uniform = 2131230765;
 			
@@ -2879,8 +2885,8 @@ namespace MobileApplication
 			// aapt resource value: 0x7f080016
 			public const int view_offset_helper = 2131230742;
 			
-			// aapt resource value: 0x7f0800ba
-			public const int visible = 2131230906;
+			// aapt resource value: 0x7f0800bc
+			public const int visible = 2131230908;
 			
 			// aapt resource value: 0x7f08003c
 			public const int withText = 2131230780;
@@ -3132,6 +3138,9 @@ namespace MobileApplication
 			
 			// aapt resource value: 0x7f04003e
 			public const int tooltip = 2130968638;
+			
+			// aapt resource value: 0x7f04003f
+			public const int Working_Hours = 2130968639;
 			
 			static Layout()
 			{
